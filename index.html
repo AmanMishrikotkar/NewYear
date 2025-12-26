@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year Gayatri ✨</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:black;color:white;overflow:hidden;text-align:center}
+
+/* FIREWORK */
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+
+/* CENTER */
+.center{
+ position:relative;
+ z-index:2;
+ height:100vh;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ padding:25px;
+}
+
+/* INTRO */
+#intro h1{font-size:38px;opacity:0;animation:fade 2s forwards}
+#intro h2{margin-top:10px;opacity:0;animation:fade 2s forwards 2s}
+@keyframes fade{to{opacity:1}}
+
+/* COUNTDOWN */
+#countdown{display:none;font-size:90px}
+#countdown span{display:none}
+
+/* BEAT TEXT */
+#beatText{
+ display:none;
+ font-size:32px;
+ color:#ff4d6d;
+ animation:beat 1s infinite;
+}
+@keyframes beat{50%{transform:scale(1.15)}}
+
+/* SLIDER */
+#slider{display:none}
+#slider img{
+ width:100%;
+ height:100vh;
+ object-fit:contain;
+ display:none;
+ animation:zoom 6s linear;
+}
+@keyframes zoom{to{transform:scale(1.1)}}
+
+/* VIDEO */
+#finalVideo{
+ display:none;
+ width:100%;
+ height:100vh;
+ object-fit:contain;
+ z-index:2;
+}
+
+/* AFTER VIDEO */
+#afterVideo{display:none}
+#afterVideo h1{color:#ff4d6d;font-size:34px}
+#afterVideo p{margin-top:15px;font-size:20px;line-height:1.6}
+
+/* BUTTON */
+#giftBtn{
+ margin-top:25px;
+ padding:12px 30px;
+ font-size:20px;
+ border:none;
+ border-radius:30px;
+ background:#ff4d6d;
+ color:white;
+ cursor:pointer;
+}
+
+/* NEW PAGE */
+#giftPage{
+ display:none;
+ position:fixed;
+ top:0;left:0;
+ width:100%;
+ height:100vh;
+ background:black;
+ z-index:5;
+ animation:slideUp 1.2s ease forwards;
+}
+@keyframes slideUp{
+ from{transform:translateY(100%)}
+ to{transform:translateY(0)}
+}
+#giftPage h1{color:#ff4d6d;font-size:36px}
+#giftPage p{margin-top:15px;font-size:20px;line-height:1.6}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+<audio id="music" src="music.mp3" loop></audio>
+
+<!-- INTRO -->
+<div id="intro" class="center">
+  <h1>Hey Gayatri… 💖</h1>
+  <h2>This New Year is just for you ✨</h2>
+</div>
+
+<!-- COUNTDOWN -->
+<div id="countdown" class="center">
+  <span id="c3">3</span>
+  <span id="c2">2</span>
+  <span id="c1">1</span>
+</div>
+
+<!-- BEAT -->
+<div id="beatText" class="center">
+  Happy New Year Gayatri 🎆
+</div>
+
+<!-- SLIDER -->
+<div id="slider">
+  <img src="C:\Users\Dell\OneDrive\Desktop\newyear\pic2.jpg.jpeg">
+  <img src="C:\Users\Dell\OneDrive\Desktop\newyear\pic1.jpg.jpeg">
+  <img src="C:\Users\Dell\OneDrive\Desktop\newyear\pic3.jpg.jpeg">
+</div>
+
+<!-- VIDEO -->
+<video id="finalVideo" src="C:\Users\Dell\OneDrive\Desktop\newyear\finalvideo.mp4"></video>
+
+<!-- AFTER VIDEO -->
+<div id="afterVideo" class="center">
+  <h1>Happy New Year Gayatri 💫</h1>
+  <p>
+    Tumhara hona mere liye ek gift hai 🤍  
+    Aur yeh naya saal…  
+    sirf aur sirf khushiyon se bhara ho ✨
+  </p>
+  <button id="giftBtn">🎁 Special Gift</button>
+</div>
+
+<!-- NEW PAGE -->
+<div id="giftPage" class="center">
+  <h1>For You, Gayatri 💖</h1>
+  <p>
+    Yeh page kisi cheez ke liye nahi…  
+    bas ek ehsaas ke liye hai 🌙  
+    <br><br>
+    Chahe time badle,  
+    chahe log badle,  
+    main hamesha yahin rahunga —  
+    tumhare saath 🤗  
+    <br><br>
+    Happy New Year once again 💫  
+    May 2026 give you everything your heart deserves ✨
+  </p>
+  <p style="margin-top:20px;opacity:.7">— From Aman 🤍</p>
+</div>
+
+<script>
+/* FIREWORK */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;canvas.height=innerHeight;
+let particles=[];
+function firework(){
+ for(let i=0;i<80;i++){
+  particles.push({
+   x:innerWidth/2,y:innerHeight/2,
+   vx:(Math.random()-0.5)*8,
+   vy:(Math.random()-0.5)*8,
+   life:100
+  });
+ }
+}
+function animate(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ particles.forEach((p,i)=>{
+  p.x+=p.vx;p.y+=p.vy;p.life--;
+  ctx.fillStyle="rgba(255,77,109,0.8)";
+  ctx.fillRect(p.x,p.y,3,3);
+  if(p.life<=0)particles.splice(i,1);
+ });
+ requestAnimationFrame(animate);
+}
+animate();
+
+/* FLOW */
+const music=document.getElementById("music");
+const intro=document.getElementById("intro");
+const countdown=document.getElementById("countdown");
+const beatText=document.getElementById("beatText");
+const slider=document.getElementById("slider");
+const images=slider.querySelectorAll("img");
+const video=document.getElementById("finalVideo");
+const afterVideo=document.getElementById("afterVideo");
+const giftBtn=document.getElementById("giftBtn");
+const giftPage=document.getElementById("giftPage");
+
+let i=0, musicTime=0;
+
+/* INTRO */
+setTimeout(()=>{
+ music.play(); firework();
+ intro.style.display="none";
+ countdown.style.display="flex";
+ c3.style.display="block";
+},4000);
+
+/* COUNTDOWN */
+setTimeout(()=>{c3.style.display="none";c2.style.display="block";},5000);
+setTimeout(()=>{c2.style.display="none";c1.style.display="block";},6000);
+setTimeout(()=>{
+ countdown.style.display="none";
+ beatText.style.display="flex";
+},7000);
+
+/* SLIDER */
+setTimeout(()=>{
+ beatText.style.display="none";
+ slider.style.display="block";
+ slide();
+},14000);
+
+function slide(){
+ images.forEach(img=>img.style.display="none");
+ images[i].style.display="block";
+ i=(i+1)%images.length;
+ setTimeout(slide,3000);
+}
+
+/* VIDEO */
+setTimeout(()=>{
+ slider.style.display="none";
+ musicTime=music.currentTime;
+ music.pause();
+ video.style.display="block";
+ video.play();
+},24000);
+
+/* VIDEO END */
+video.onended=()=>{
+ video.style.display="none";
+ music.currentTime=musicTime;
+ music.play();
+ firework();
+ afterVideo.style.display="flex";
+};
+
+/* BUTTON → NEW PAGE */
+giftBtn.onclick=()=>{
+ firework();
+ giftPage.style.display="flex";
+};
+</script>
+
+</body>
+</html>
